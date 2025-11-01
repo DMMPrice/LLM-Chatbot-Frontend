@@ -1,73 +1,113 @@
-# Welcome to your Lovable project
+# 🧠 QueryIQ – AI Chat Assistant
 
-## Project info
+QueryIQ is an **AI-powered SQL assistant** that translates natural language queries into SQL, executes them securely, and visualizes the results — helping you discover insights from your **customer data** effortlessly.
 
-**URL**: https://lovable.dev/projects/35aaf1b1-7f79-4c29-8793-0025b26bd764
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🚀 Overview
 
-**Use Lovable**
+QueryIQ lets users **chat naturally** with their databases.  
+You can ask questions like:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/35aaf1b1-7f79-4c29-8793-0025b26bd764) and start prompting.
+> “Show me all male customers from Mumbai.”  
+> “List top 10 customers by purchase frequency.”  
+> “Find customers registered in the last 30 days.”
 
-Changes made via Lovable will be committed automatically to this repo.
+The app automatically:
+1. Converts your query to **SQL** using an AI model.
+2. Executes it safely on the backend.
+3. Returns and displays the results in a **formatted table**.
+4. Logs all queries in the **Query Logs** section for future review.
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🧩 Tech Stack
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+| Layer            | Technology                                        |
+|------------------|---------------------------------------------------|
+| **Frontend**     | React (Vite + TypeScript + JavaScript)            |
+| **UI Framework** | ShadCN UI + Tailwind CSS                          |
+| **Backend**      | FastAPI (Python)                                  |
+| **Database**     | PostgresSQL / SQLite                              |
+| **ORM**          | SQLAlchemy                                        |
+| **AI Model**     | GROK / LLM for Natural Language → SQL Translation |
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 🗂️ Key Features
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### 💬 Chat Interface
+- Natural language interaction with your dataset.
+- Instant response from AI.
+- Clean, modern chat UI with automatic scrolling.
 
-# Step 3: Install the necessary dependencies.
-npm i
+### 🧾 Query Logs Page
+- View all previous queries, their generated SQL, timestamps, and execution status.
+- Search or filter through past logs.
+- Built using ShadCN `Card`, `Table`, and `Input` components.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### 🧱 Secure SQL Execution
+- AI-generated SQL is **validated** before execution:
+  - Only `SELECT` statements allowed.
+  - Blocked commands: `INSERT`, `UPDATE`, `DELETE`, `DROP`, `ALTER`, etc.
+  - Query scope restricted to the `customers` table.
+
+### ⚙️ Modular Backend
+- `chat` router handles AI queries and responses.
+- `query_logs` router manages history.
+- Environment variable–based `APP_TOKEN` for API auth.
+- CORS enabled for React frontend.
+
+---
+
+## 🧑‍💻 Local Setup Guide
+
+### **1️⃣ Clone the Repository**
+```bash
+git clone https://github.com/DMMPrice/LLM-Chatbot-Frontend.git
+cd LLM-Chatbot-Frontend
+```
+
+### **4️⃣ Install Dependencies**
+```bash
+npm i 
+```
+
+### **4️⃣ Start Frontend**
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🧠 Example Queries
 
-**Use GitHub Codespaces**
+| Natural Query                  | Generated SQL                                                |
+|--------------------------------|--------------------------------------------------------------|
+| Show all female customers      | `SELECT * FROM customers WHERE LOWER(gender) = 'female'`     |
+| List customer names from Delhi | `SELECT name FROM customers WHERE LOWER(location) = 'delhi'` |
+| Show total customers           | `SELECT COUNT(*) FROM customers`                             |
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+---
 
-## What technologies are used for this project?
+## 📊 Interface Snapshots
 
-This project is built with:
+### 💬 Chat Interface
+> AI-powered assistant ready to interpret user queries and generate SQL automatically.
+![Chat Screenshot](./Screenshot%202025-11-01%20230200.png)
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### 📜 Query Logs
+> Shows your full query history with timestamps, SQL commands, and success status.
+![Logs Screenshot](./Screenshot%202025-11-01%20230225.png)
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/35aaf1b1-7f79-4c29-8793-0025b26bd764) and click on Share -> Publish.
+## 🛡️ Security & Validation
 
-## Can I connect a custom domain to my Lovable project?
+- ✅ Token-based request authentication (`x-token` header)
+- ✅ SQL injection prevention (`SELECT`-only restriction)
+- ✅ CORS allowed for trusted origins only
+- ✅ Input sanitization before execution
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+---
